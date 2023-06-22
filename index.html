@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tamjid Khan</title>
   <style>
-    /* Add your custom CSS styles here */
-    /* For example: */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -36,6 +34,23 @@
     p {
       margin-bottom: 10px;
     }
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .video-container video {
+      max-width: 100%;
+      max-height: 100%;
+    }
   </style>
 </head>
 <body>
@@ -55,7 +70,7 @@
     <h2>Resume </h2>
     <p style = "background-color:#eeee"><a href="Resume.pdf">Tamjid Khan Resume</a>.</p>
     
-    <h2>Skills</h2>
+    <h2>Software Skills</h2>
     <ul>
       <li>C/C++</li>
       <li>Python</li>
@@ -63,33 +78,131 @@
       <li>Arduino IDE</li>
       <li>React Native/Javascript</li>
       <li>Visual Studio Code Extensions</li>
-      <!-- Add more skills as needed -->
+    </ul>
+
+    <h2>Hardware Skills</h2>
+    <ul>
+      <li>Circuit Design Logic</li>
+      <li>Motors and Motor Drivers</li>
+      <li>Verilog and Xilinx</li>
+      <li>Cadence Virtuoso</li>
+      <li>Basic 3D Printing</li>
     </ul>
     
-    <header>Projects/Experience</header>
+    <header>Projects / Experience</header>
     <h1 style = "text-align:center">OML Alexandria</h1>
     <p>
-    Visual Studio (VS) Code is a very popular environment for creating and editing code. It provides support for a variety of different languages through extensions. Ontological Modeling Language (OML) is a systems engineering language that is designed to model relationships between structures and objects similar to unified modeling language (UML). It was developed by a team of NASA engineers called openCAESAR.
+    Visual Studio (VS) Code is a very popular environment for creating and editing code. It provides support for a variety of different languages through extensions. 
+    Ontological Modeling Language (OML) is a systems engineering language that is designed to model relationships between structures and objects similar to unified modeling language (UML). 
+    It was developed by a team of NASA engineers called openCAESAR, one of whom was the Professor for our class that assigned this project.
     </p>
     <p>
-        OML Alexandria is a VSCode extension created by our UCLA project group for CS130 - Software Engineering: Team Ptolemy. Our group created an extension that uses Langium to provide language support for the OML language. This includes features such as syntax highlighting, code refactoring, code folding, goto definition, and many more. Furthermore, the extension provides a method to visualize the code using UML-like diagrams to show objects and their relationships
+        OML Alexandria is a VSCode extension created by our UCLA project group for CS130 - Software Engineering: Team Ptolemy. 
+        Our group created an extension that uses Langium to provide language support for the OML language. 
+        This includes features such as syntax highlighting, code refactoring, code folding, goto definition, and many more. 
+        Furthermore, the extension provides a method to visualize the code using UML-like diagrams to show objects and their relationships
     </p>
-    <img src="OML-Alexandria.PNG">
+    <img src="OML-Alexandria.PNG" class="center">
     <p style = "text-align:center">
         The above picture shows an example of an OML file being visualized as a diagram.
     </p>
     
     <h1 style = "text-align:center">MediMate: Smart Pill Dispenser</h1>
     <p>
-        For my Capstone Project in ECE183 - Robotic Systems, I worked in a group of 5 on a prototype for a robot called MediMate. The intuition behind the project was to create a robot that can scan pill bottles and store dosage information internally. Additionally, it would store the pills and automatically dispense them. Although our final prototype was unable to automatically dispense pills, it was able to scan and schedule pill dosages.
+        For my Capstone Project in ECE183 - Robotic Systems, I worked in a group of 5 on a prototype for a robot called MediMate. 
+        The intuition behind the project was to create a robot that can scan pill bottles and store dosage information internally. 
+        Additionally, it would store the pills and automatically dispense them. 
+        Although our final prototype was unable to automatically dispense pills, it was able to scan and schedule pill dosages.
     </p>
     <h2> Overview of Design</h2>
-    <img src="System-Design.png">
+    <img src="System-Design.png" class="center">
     <p style = "text-align:center">
         Final System Design
     </p>
     <p>
-        The primary processing unit used in the prototype was a Raspberry Pi Zero W. This was because the libraries we planned to use Python scripts and Libraries for most of the software. Furthermore, we utilized the Raspberry Pi camera module ArduCam to easily take pictures that can be stored instantly on the Pi.
+        The primary processing unit used in the prototype was a Raspberry Pi Zero W. 
+        This was because the libraries we planned to use Python scripts and Libraries for most of the software. 
+        Furthermore, we utilized the Raspberry Pi camera module ArduCam to easily take pictures that can be stored instantly on the Pi.
+        The following diagram showcases the software pipeline that makes up the bulk of the project.
+    </p>
+    <h2> Software Pipeline Diagram</h2>
+    <img src="Software-Pipeline.png" class="center">
+    <p style = "text-align:center">
+      Software Pipeline Breakdown
+    </p>
+    <p>
+      The pills are first scanned using a small plate that rotates in 8 increments.
+      After 8 pictures are taken by the camera, the photos are processed using unwrapping and stitching.
+      These algorithms use OpenCV Python to process images.
+    </p>
+    <h2> Unwrapping </h2>
+    <img src="Unwrapping.PNG" class="center">
+    <p style = "text-align:center">
+      Cropping and unwrapping of pill label image
+    </p>
+    <p>
+      Unwrapping is necessary to remove the curvature of the label.
+      This allows the images to be stitched properly into a panorama.
+      After all 8 images are unwrapped, it then gets combined into a full panoramic label.
+    </p>
+    <h2> Stitching </h2>
+    <img src="Stitching.PNG" class="center">
+    <p style = "text-align:center">
+      Stitching of 8 images into panoramic label.
+    </p>
+    <p>
+      The images are combined into one image of the full label.
+      Now, this image is taken into the Optical Character Recognition (OCR) script.
+    </p>
+    <h2> OCR </h2>
+    <img src="OCR.PNG" class="center">
+    <p style = "text-align:center">
+      Convert an image into raw text
+    </p>
+    <p>
+      This script uses PyTesseract to read the image and generate a long string of all the text that was recognized.
+      The text is then parsed in Python to extract fields necessary for storage and dispensing.
+      These fields include: Name, quantity, and dosage.
+      These fields are transferred as input into the Scheduling script.
+    </p>
+    <h2> Scheduling </h2>
+    <img src="Scheduling.PNG" class="center">
+    <p style = "text-align:center">
+      Schedule dosages given fields from OCR
+    </p>
+    <p>
+      The Scheduling Algorithm involves multiple steps. First, it uses Crontab to schedule tasks.
+      Crontab is a Linux based job scheduler. It allows users to run a command at specified times indefinetely.
+      The scheduling algorithm creates a crontab entry at the correct times given by the daily dosage.
+      The entry runs another script: Controller.py, which will activate the motors to dispense one pill
+    </p>
+    <h2> Dispensing </h2>
+    <div class="video-container">
+      <video controls>
+        <source src="Dispensing.mov" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p>
+      Pills are stored on a rotating plate of 8 slots. 7 of the slots are containers that store pills.
+      The last slot is an empty hole that is used for dispensing. For dispensing, the mechanism that was chosen was
+      a vacuum tube. This was to ensure that only one pil would be dispensed at a time. A tube at the end of the
+      pump would be sized to the smallest pill size, so the pill would not be sucked into the tube, but rather
+      suspended at the end of the tube. The Dispensing Algorithm works as follows:
+    </p>
+    <ul>
+      <li> Rotate the plate to the appropriate container</li>
+      <li> Activate the vacuum pump</li>
+      <li> Lower the vacuum pump tube </li>
+      <li> Raise the vacuum pump tube </li>
+      <li> Reset plate to original position</li>
+      <li> Deactivate the vacuum pump</li>
+    </ul>
+    <p>
+      In this prototype, the dispensing mechanism is not fully automatic as evident in the video.
+      The additional funds needed to automate this tasks would have exceeded our budget for thus project.
+      In the Final Product, however, a linear actuator and pneumatic sensors would be necessary to lover/raise
+      the pump and to detect if a pill is picked up by the vacuum.
     </p>
   </main>
 </body>
